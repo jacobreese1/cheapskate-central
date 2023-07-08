@@ -1,8 +1,14 @@
 import "./App.css";
 import Header from "./components/Header";
+import Income from "./components/Income";
 
 function App() {
-  return <Header />;
+  return (
+    <div>
+      <Header />
+      <Income />
+    </div>
+  );
 }
 
 export default App;
