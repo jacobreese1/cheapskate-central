@@ -1,9 +1,8 @@
-import { Typography } from '@mui/material';
-import React from 'react';
-
+import { Typography } from "@mui/material";
+import React from "react";
 
 const Header = () => {
-    return ( <Typography>Budget App</Typography> );
-}
- 
+  return <Typography variant="h3">Cheapskate Central</Typography>;
+};
+
 export default Header;
