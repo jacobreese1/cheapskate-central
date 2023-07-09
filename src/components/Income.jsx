@@ -14,15 +14,9 @@ import React, { useState, useEffect } from "react";
 const Income = () => {
   const [input, setInput] = useState();
   const [incomeArray, setIncomeArray] = useState([]);
-  //   const [incomeAmountArray, setIncomeAmountArray] = useState([""]);
 
-  //create input for table to input values - source and amount
-  //input those values into an array that can be saved into a database
-  //display values from array in the table
-
-  //  const inputHandler = (event) => {
-  //     return (  );
-  //  }
+    //add total box to table showing the total of all the income amounts
+    //add delete button to get rid of income inputs
 
   const handleInput = (event) => {
     const { value, name } = event.target;
