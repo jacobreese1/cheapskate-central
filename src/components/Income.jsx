@@ -9,14 +9,15 @@ import {
   TableRow,
   TextField,
 } from "@mui/material";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import React, { useState, useEffect } from "react";
 
 const Income = () => {
   const [input, setInput] = useState();
   const [incomeArray, setIncomeArray] = useState([]);
 
-    //add total box to table showing the total of all the income amounts
-    //add delete button to get rid of income inputs
+  //add total box to table showing the total of all the income amounts
+  //add delete button to get rid of income inputs
 
   const handleInput = (event) => {
     const { value, name } = event.target;
@@ -26,11 +27,19 @@ const Income = () => {
     }));
   };
 
-  let arrayId = 0;
+  const deleteItem = () => {
+    console.log(incomeArray);
+    // setIncomeArray(incomeArray.filter((item) => item.id !== incomeArray.id));
+  };
+
+  let arrayId = Math.random();
 
   const submitInput = () => {
     const { source, amount } = input;
-    setIncomeArray([...incomeArray, { id: arrayId++, source, amount }]);
+    setIncomeArray([
+      ...incomeArray,
+      { key: arrayId, id: arrayId++, source, amount },
+    ]);
   };
 
   useEffect(() => {
@@ -59,6 +68,7 @@ const Income = () => {
               <TableRow>
                 <TableCell key={inputs.id}>{inputs.source}</TableCell>
                 <TableCell key={inputs.id}>{inputs.amount}</TableCell>
+                <DeleteOutlineIcon onClick={deleteItem}></DeleteOutlineIcon>
               </TableRow>
             ))}
             {/* <TableCell>Authentic</TableCell>
