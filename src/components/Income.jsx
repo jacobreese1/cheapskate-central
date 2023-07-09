@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -12,6 +13,9 @@ import React, { useState, useEffect } from "react";
 
 const Income = () => {
   const [input, setInput] = useState();
+  const [incomeArray, setIncomeArray] = useState([]);
+  //   const [incomeAmountArray, setIncomeAmountArray] = useState([""]);
+
   //create input for table to input values - source and amount
   //input those values into an array that can be saved into a database
   //display values from array in the table
@@ -28,8 +32,17 @@ const Income = () => {
     }));
   };
 
-    console.log(input)
-    
+  let arrayId = 0;
+
+  const submitInput = () => {
+    const { source, amount } = input;
+    setIncomeArray([...incomeArray, { id: arrayId++, source, amount }]);
+  };
+
+  useEffect(() => {
+    console.log(incomeArray);
+  }, [incomeArray]);
+
   return (
     <Box
       sx={{
@@ -48,25 +61,24 @@ const Income = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell>Authentic</TableCell>
-              <TableCell>$1000</TableCell>
-            </TableRow>
+            {incomeArray.map((inputs) => (
+              <TableRow>
+                <TableCell key={inputs.id}>{inputs.source}</TableCell>
+                <TableCell key={inputs.id}>{inputs.amount}</TableCell>
+              </TableRow>
+            ))}
+            {/* <TableCell>Authentic</TableCell>
+              <TableCell>$1000</TableCell> */}
           </TableBody>
         </Table>
       </TableContainer>
-      <Box sx={{ maxWidth: "100%" }}>
-        <TextField
-          name="source"
-          onChange={handleInput}
-          placeholder="Source"
-        ></TextField>
-        <TextField
-          name="amount"
-          onChange={handleInput}
-          placeholder="Amount"
-        ></TextField>
-      </Box>
+      <form>
+        <TextField name="source" onChange={handleInput} placeholder="Source" />
+        <TextField name="amount" onChange={handleInput} placeholder="Amount" />
+        <Button variant="contained" onClick={submitInput}>
+          Submit
+        </Button>
+      </form>
     </Box>
   );
 };
