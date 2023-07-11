@@ -27,9 +27,12 @@ const Income = () => {
     }));
   };
 
-  const deleteItem = () => {
-    console.log(incomeArray);
-    // setIncomeArray(incomeArray.filter((item) => item.id !== incomeArray.id));
+  const deleteItem = (input) => {
+    // for (let i = 0; i < incomeArray.length; i++) {
+    // console.log(input.id);
+    const newArray = incomeArray.filter((current) => current.id !== input.id);
+    setIncomeArray(newArray);
+    // console.log(input.id);
   };
 
   let arrayId = Math.random();
@@ -68,7 +71,9 @@ const Income = () => {
               <TableRow>
                 <TableCell key={inputs.id}>{inputs.source}</TableCell>
                 <TableCell key={inputs.id}>{inputs.amount}</TableCell>
-                <DeleteOutlineIcon onClick={deleteItem}></DeleteOutlineIcon>
+                <DeleteOutlineIcon
+                  onClick={() => deleteItem(inputs)}
+                ></DeleteOutlineIcon>
               </TableRow>
             ))}
             {/* <TableCell>Authentic</TableCell>
