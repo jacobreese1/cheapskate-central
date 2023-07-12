@@ -5,6 +5,7 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
   TableRow,
   TextField,
@@ -15,9 +16,7 @@ import React, { useState, useEffect } from "react";
 const Income = () => {
   const [input, setInput] = useState();
   const [incomeArray, setIncomeArray] = useState([]);
-
-  //add total box to table showing the total of all the income amounts
-  //add delete button to get rid of income inputs
+  const [total, setTotal] = useState();
 
   const handleInput = (event) => {
     const { value, name } = event.target;
@@ -32,7 +31,6 @@ const Income = () => {
     // console.log(input.id);
     const newArray = incomeArray.filter((current) => current.id !== input.id);
     setIncomeArray(newArray);
-    // console.log(input.id);
   };
 
   let arrayId = Math.random();
@@ -46,7 +44,12 @@ const Income = () => {
   };
 
   useEffect(() => {
-    console.log(incomeArray);
+    const initialValue = 0;
+    const sumWithInitial = incomeArray.reduce(
+      (accumulator, currentValue) => accumulator + +currentValue.amount,
+      initialValue
+    );
+    setTotal(sumWithInitial);
   }, [incomeArray]);
 
   return (
@@ -58,7 +61,7 @@ const Income = () => {
         left: "100px",
       }}
     >
-      <TableContainer>
+      <TableContainer sx={{ textAlign: "center" }}>
         <Table sx={{ maxWidth: "100px" }}>
           <TableHead>
             <TableRow>
@@ -70,20 +73,33 @@ const Income = () => {
             {incomeArray.map((inputs) => (
               <TableRow>
                 <TableCell key={inputs.id}>{inputs.source}</TableCell>
-                <TableCell key={inputs.id}>{inputs.amount}</TableCell>
+                <TableCell key={inputs.id}>${inputs.amount}</TableCell>
                 <DeleteOutlineIcon
+                  sx={{ height: "100", my: "25%" }}
                   onClick={() => deleteItem(inputs)}
                 ></DeleteOutlineIcon>
               </TableRow>
             ))}
-            {/* <TableCell>Authentic</TableCell>
-              <TableCell>$1000</TableCell> */}
           </TableBody>
+          <TableFooter sx={{ fontWeight: "800" }}>
+            <TableCell>Total</TableCell>
+            <TableCell>${total}</TableCell>
+          </TableFooter>
         </Table>
       </TableContainer>
       <form>
-        <TextField name="source" onChange={handleInput} placeholder="Source" />
-        <TextField name="amount" onChange={handleInput} placeholder="Amount" />
+        <TextField
+          name="source"
+          type="text"
+          onChange={handleInput}
+          placeholder="Source"
+        />
+        <TextField
+          name="amount"
+          type="number"
+          onChange={handleInput}
+          placeholder="Amount"
+        />
         <Button variant="contained" onClick={submitInput}>
           Submit
         </Button>
