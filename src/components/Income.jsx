@@ -10,6 +10,7 @@ import {
   TableRow,
   TextField,
 } from "@mui/material";
+import Input from "@mui/joy/Input";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import React, { useState, useEffect } from "react";
 
@@ -55,10 +56,11 @@ const Income = () => {
   return (
     <Box
       sx={{
-        position: "fixed",
-        bottom: "100px",
-        right: "100px",
-        left: "100px",
+        maxWidth: "50%",
+        flexBasis: "50%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "stretch",
       }}
     >
       <TableContainer sx={{ textAlign: "center" }}>
@@ -87,15 +89,17 @@ const Income = () => {
           </TableFooter>
         </Table>
       </TableContainer>
-      <form>
-        <TextField
+      <form sx={{ display: "flex" }}>
+        <Input
+          variant="soft"
           name="source"
           type="text"
           onChange={handleInput}
           placeholder="Source"
         />
-        <TextField
+        <Input
           name="amount"
+          variant="outlined"
           type="number"
           onChange={handleInput}
           placeholder="Amount"
